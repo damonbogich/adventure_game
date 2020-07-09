@@ -76,8 +76,10 @@ while playing is True:
 #current room
     print(player1)
     the_items = player1.current_room.room_items()
+    player1.print_items()
     print(f"{player1.current_room.name}'s items:", the_items)
     
+    current_room = player1.current_room
 
     #give player the ability to pickup items from a room:
         #parser that asks the player if he would like to 
@@ -94,9 +96,11 @@ while playing is True:
     if first_input_word == 'take':
         
         if second_input_word in the_items:
-            print(f"you took the {second_input_word}!")
-            #needs a function for the player to add item
-            #needs a function for the room to lose item
+            for item in items.values():
+                if item.name == second_input_word:
+                    player1.take_item(item)
+                    #need the room to drop the item
+                    current_room.item_picked_up(item)
         else:
             print("that isn't there")
                 

@@ -9,6 +9,14 @@ class Player:
     def __str__(self):
         return f"You are in {self.current_room.name}.  {self.current_room.description}"
     
+    def print_items(self):
+        for item in self.items:
+            print(item.name)
+
+    def take_item(self,item):
+        print(f"you took the {item.name}!")
+        self.items.append(item)
+    
     def north(self):
         try:
             if self.current_room.n_to is not None:
@@ -40,6 +48,9 @@ class Player:
                 self.current_room = new_room
         except AttributeError:
             print("Can't move that way from here")
+
+    
+
     
     
     # def west(self):

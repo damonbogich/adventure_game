@@ -15,4 +15,6 @@ class Room:
         item_names = [item.name for item in self.items]
         # print(f"{self.name}'s items: {item_names}")
         return item_names
+    def item_picked_up(self,item):
+        self.items.remove(item)
 
