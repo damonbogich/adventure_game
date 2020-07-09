@@ -1,18 +1,27 @@
 from room import Room
 from player import Player
+from item import Item
 
+#declare all items
+items = {
+    'sword': Item('Sword', 'Double edged sword'),
+    'basketball': Item('Basketball', "Used to play a game that hasn't been invented yet"),
+    'iphone': Item('Iphone', 'Magical communication device from the future'),
+    'coffee': Item('Coffee', 'Potion to help one awake in the morning'),
+    'cigarettes': Item('Cigarettes', 'Tobacco infused death sticks'),
+    'notebook': Item('Notebook', 'Used for writing.  Also a love story.')
+}
 # Declare all the rooms
-
 room = {
     'outside':  Room("Outside Cave Entrance",
-                     "North of you, the cave mount beckons"),
+                     "North of you, the cave mount beckons", [items['sword'], items['notebook']]),
 
     'foyer':    Room("Foyer", """Dim light filters in from the south. Dusty
-passages run north and east."""),
+passages run north and east.""", [items['iphone']]),
 
     'overlook': Room("Grand Overlook", """A steep cliff appears before you, falling
 into the darkness. Ahead to the north, a light flickers in
-the distance, but there is no way across the chasm."""),
+the distance, but there is no way across the chasm.""", [items['coffee']]),
 
     'narrow':   Room("Narrow Passage", """The narrow passage bends here from west
 to north. The smell of gold permeates the air."""),
@@ -37,8 +46,16 @@ room['treasure'].s_to = room['narrow']
 # Main
 #
 
+
 # Make a new player object that is currently in the 'outside' room.
-player1 = Player("Damon", room['outside'])
+player1 = Player("Damon", room['outside'], [items['basketball'], items['cigarettes']])
+player_item_names = [item.name for item in player1.items]
+# for item in player1.items:
+#     print(item.name)
+# print(room['outside'].items.name)
+# print(room['foyer'].items.name)
+# print(room['overlook'].items.name)
+
 # Write a loop that:
 #
 # * Prints the current room name
@@ -58,23 +75,48 @@ while playing is True:
 #TODO: set up string method in player class so that it prints player's name, current room, and description
 #current room
     print(player1)
+    the_items = player1.current_room.room_items()
+    print(f"{player1.current_room.name}'s items:", the_items)
+    
 
-#user input: x = input("Enter comma-separated numbers: ").split(',')
-    #need a direction for the player to move in n, s, e, w????
-    #if there is no room in that direction: error(can't go that way)
-    #if there is a room in that direction: restart loop and say player's room and description
-    direction = input("Which direction would you like to go? N, E, S, or W?: ")
-    # if direction == 'n' and player1.current_room.n_to is not False:
-    #     new_room = player1.current_room.n_to
-    #     player1.current_room = new_room
-    if direction == 'n':
-        player1.north()
-    if direction == 'e':
-        player1.east()
-    if direction == 's':
-        player1.south()
-    if direction == 'w': 
-        player1.west()
-    if direction == 'q':
-        exit()
+    #give player the ability to pickup items from a room:
+        #parser that asks the player if he would like to 
+    take_room_item_option = input("type in 'take (item name)' to take the item or 'no' to move on: ").split(' ')
+    # print(take_room_item_option)
+    first_input_word = take_room_item_option[0]
+    second_input_word = take_room_item_option[1]
+
+        #if player types in 'no', then we move on 
+    
+    if take_room_item_option == 'no':
+        print('fine, you get nothing!')
+    #trying to figure out how to check if the name of an item matches the input:
+    if first_input_word == 'take':
+        
+        if second_input_word in the_items:
+            print(f"you took the {second_input_word}!")
+            #needs a function for the player to add item
+            #needs a function for the room to lose item
+        else:
+            print("that isn't there")
+                
+            
+            
+        
+    
+
+
+
+    # direction = input("Which direction would you like to go? N, E, S, or W?: ")
+
+    # if direction == 'n':
+    #     player1.north()
+    # if direction == 'e':
+    #     player1.east()
+    # if direction == 's':
+    #     player1.south()
+    # if direction == 'w': 
+    #     player1.west()
+    # if direction == 'q':
+    #     exit()
     

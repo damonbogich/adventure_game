@@ -11,4 +11,8 @@ class Room:
         # self.e_to = e_to
         # self.s_to = s_to
         # self.w_to = w_to
+    def room_items(self):
+        item_names = [item.name for item in self.items]
+        # print(f"{self.name}'s items: {item_names}")
+        return item_names
 
