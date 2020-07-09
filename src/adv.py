@@ -85,15 +85,23 @@ while playing is True:
         #parser that asks the player if he would like to 
     take_room_item_option = input("type in 'take (item name)' to take the item or 'no' to move on: ").split(' ')
     # print(take_room_item_option)
-    first_input_word = take_room_item_option[0]
-    second_input_word = take_room_item_option[1]
+    if len(take_room_item_option) == 0:
+        print("you did not type anything")
+    elif len(take_room_item_option) == 1:
+        first_input_word = take_room_item_option[0]
+    elif len(take_room_item_option) == 2:
+        first_input_word = take_room_item_option[0]
+        second_input_word = take_room_item_option[1]
+    else:
+        print('you entered too many words')
 
         #if player types in 'no', then we move on 
     
     if take_room_item_option == 'no':
         print('fine, you get nothing!')
+        
     #trying to figure out how to check if the name of an item matches the input:
-    if first_input_word == 'take':
+    elif first_input_word == 'take':
         
         if second_input_word in the_items:
             for item in items.values():
@@ -105,22 +113,17 @@ while playing is True:
             print("that isn't there")
                 
             
-            
-        
-    
 
+    direction = input("Which direction would you like to go? N, E, S, or W?: ")
 
-
-    # direction = input("Which direction would you like to go? N, E, S, or W?: ")
-
-    # if direction == 'n':
-    #     player1.north()
-    # if direction == 'e':
-    #     player1.east()
-    # if direction == 's':
-    #     player1.south()
-    # if direction == 'w': 
-    #     player1.west()
-    # if direction == 'q':
-    #     exit()
+    if direction == 'n':
+        player1.north()
+    if direction == 'e':
+        player1.east()
+    if direction == 's':
+        player1.south()
+    if direction == 'w': 
+        player1.west()
+    if direction == 'q':
+        exit()
     
