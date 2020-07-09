@@ -2,10 +2,10 @@
 # currently.
 
 class Player:
-    def __init__(self, name, current_room):
+    def __init__(self, name, current_room, items=None):
         self.name = name
         self.current_room = current_room
-        
+        self.items = items
     def __str__(self):
         return f"You are in {self.current_room.name}.  {self.current_room.description}"
     
@@ -43,8 +43,9 @@ class Player:
     
     
     # def west(self):
-    #     if self.current_room.w_to:
+    #     if self.current_room.w_to != None:
     #         new_room = self.current_room.w_to
     #         self.current_room = new_room
     #     else:
     #         print("Can't move that way from here")
+    #         return None
