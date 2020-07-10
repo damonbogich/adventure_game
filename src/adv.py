@@ -67,6 +67,7 @@ player_item_names = [item.name for item in player1.items]
 #
 # If the user enters "q", quit the game.
 
+#set boolean to run game loop:
 playing = True
 
 while playing is True:
@@ -74,17 +75,26 @@ while playing is True:
 #printing out current player name and room description
 #TODO: set up string method in player class so that it prints player's name, current room, and description
 #current room
+    #prints current room and description of that room:
     print(player1)
+    
+    #creating player item list to print
+    player_items = player1.print_items()
+    print('your current items:', player_items)
+
+    #creating list of item names in current room to print
     the_items = player1.current_room.room_items()
-    player1.print_items()
     print(f"{player1.current_room.name}'s items:", the_items)
     
+    #saving player's current room to a varialbe
     current_room = player1.current_room
 
-    #give player the ability to pickup items from a room:
-        #parser that asks the player if he would like to 
+    #input from player to see if they want to take an item and
+    #breaking up their answer into an array
     take_room_item_option = input("type in 'take (item name)' to take the item or 'no' to move on: ").split(' ')
-    # print(take_room_item_option)
+    
+    #these blocks are just to set variables depending on length
+    #of string user inputs
     if len(take_room_item_option) == 0:
         print("you did not type anything")
     elif len(take_room_item_option) == 1:
@@ -94,26 +104,30 @@ while playing is True:
         second_input_word = take_room_item_option[1]
     else:
         print('you entered too many words')
-
-        #if player types in 'no', then we move on 
     
-    if take_room_item_option == 'no':
+    #if player responds with no, we move on
+    if first_input_word == 'no':
         print('fine, you get nothing!')
         
-    #trying to figure out how to check if the name of an item matches the input:
+    #setting up logic for if the user wants to take an item
     elif first_input_word == 'take':
-        
+        #checking if second word matches an item name
+        #if it is then item is added to player's items and dropped 
+        #from rooms items
         if second_input_word in the_items:
             for item in items.values():
                 if item.name == second_input_word:
                     player1.take_item(item)
-                    #need the room to drop the item
                     current_room.item_picked_up(item)
         else:
             print("that isn't there")
+    
+    #TODO set up similar logic but for player to drop an item
+        #input: would you like to drop any items off here?
                 
             
-
+    #after user gives says whether they want to take an item, they're
+    #prompted to move to a new room
     direction = input("Which direction would you like to go? N, E, S, or W?: ")
 
     if direction == 'n':

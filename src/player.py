@@ -10,8 +10,9 @@ class Player:
         return f"You are in {self.current_room.name}.  {self.current_room.description}"
     
     def print_items(self):
-        for item in self.items:
-            print(item.name)
+        item_list = [item.name for item in self.items]
+        # print('your items currently include:', item_list)
+        return item_list
 
     def take_item(self,item):
         print(f"you took the {item.name}!")
